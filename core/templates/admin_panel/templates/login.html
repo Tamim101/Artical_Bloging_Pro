@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home Decor</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="{% static 'website/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'website/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'website/assets/css/admin_style.css' %}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
+
+<body class="sidebar-mini">
+    <div class="login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="accountWrapper" action="{% url 'admin_panel:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="accountForm form-style">
+                            <div class="fromTitle">
+                                <h2>Login</h2>
+                                <p>Sign into your pages account</p>
+                                {% include 'messages.html' %}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <label for="Email">Email</label>
+                                    <input type="text" id="email" name="email" placeholder="demo@gmail.com">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="form-group">
+                                        <label for="Phone">Password</label>
+                                        <input class="pwd" type="password" placeholder="Password" id="password" name="password">
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default reveal" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                    </span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <div class="check-box-wrap">
+                                        <div class="input-box">
+                                            <input type="checkbox" id="fruit4" name="fruit-4" value="Strawberry">
+                                            <label for="fruit4">Remember Me</label>
+                                        </div>
+                                        <div class="forget-btn">
+                                            <a href="{% url 'admin_panel:forgot' %}">Forgot Password?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <button type="submit" class="accountBtn">Login</button>
+                                </div>
+                            </div>
+                            <h4 class="or"><span>OR</span></h4>
+                            <ul class="socialLoginBtn">
+                                <li><button class="facebook" tabindex="0" type="button"><span><i class="fa fa-facebook"></i></span></button></li>
+                                <li><button class="twitter" tabindex="0" type="button"><span><i class="fa fa-twitter"></i></span></button></li>
+                                <li><button class="linkedin" tabindex="0" type="button"><span><i class="fa fa-linkedin"></i></span></button></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
