@@ -24,5 +24,5 @@ urlpatterns = [
                      path('our_team_list/', views.our_Team_list, name='our_Team_list'),
                       path('delete_team/<int:pk>', views.delete_team, name='delete_team'),
                        path('create_team/', views.create_team, name='create_team'),
-                        # path('send_email/', views.send_email, name='send_email'),
+                        path('inx/', views.inx, name='inx'),
 ]

@@ -10,6 +10,7 @@
 <html lang="en">
 <head>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+ 
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
@@ -40,7 +41,8 @@
   <link rel="stylesheet" href="{% static 'plugins/slick/slick.css'%}">
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{% static 'css/style.css'%}">
-
+  <script  src="https://ss.mndsrv.com/static/f0499a88-28b9-4d54-9f27-f22e7a00a5db.js"></script>
+  <link href="https://ss.mndsrv.com/static/f0499a88-28b9-4d54-9f27-f22e7a00a5db.css" rel="stylesheet">
 </head>
 <body id="body">
 
@@ -59,7 +61,7 @@
   </div>
   <!--
   End Preloader
-  ==================================== --> 
+  ==================================== -->
 
 <!--
 Fixed Navigation
@@ -69,7 +71,7 @@ Fixed Navigation
     <!-- main nav -->
     <nav class="navbar navbar-expand-lg navbar-light px-0">
       <!-- logo -->
-      <a class="navbar-brand logo" href="index.html">
+      <a class="navbar-brand logo" href="#">
         <img loading="lazy" class="logo-default" src="{% static 'images/logo.png'%}" alt="logo" />
         <img loading="lazy" class="logo-white" src="{% static 'images/logo-white.png'%}" alt="logo" />
       </a>
@@ -87,11 +89,11 @@ Fixed Navigation
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{%url 'home'%}">Homepage</a></li>
-             
+
               </li>
             </ul>
           </li>
-            
+
           <li class="nav-item ">
             <a class="nav-link" href="{%url 'blog'%}">Blog</a>
           </li>
@@ -112,7 +114,7 @@ Fixed Navigation
           <li class="nav-item ">
             <a class="nav-link" href="{% url 'login'%}">Login</a>
           </li>
-         
+
               </li>
             </ul>
           </li>
@@ -144,7 +146,7 @@ End Fixed Navigation
 <section class="blog-details section" data-aos="zoom-in">
   <div class="container">
     <div class="row">
-  
+
       <div class="col-lg-8">
         <article class="post">
           <div class="post-image mb-5">
@@ -152,7 +154,7 @@ End Fixed Navigation
           </div>
           <!-- Post Content -->
           <div class="post-content">
-            <h3>Cras Sed Elit Sit Amet.</h3>
+            <h3>{{blog.title}}</h3>
             <ul class="list-inline">
               <li class="list-inline-item">
                 <a href="index.html">Admin</a>&nbsp;/
@@ -164,10 +166,14 @@ End Fixed Navigation
                 <a href="single-post.html">30 likes</a>
               </li>
             </ul>
-        
+
             <!-- blockquote -->
-            <blockquote>{{blog.description}}</blockquote>
-        
+            <blockquote>{{blog.description|safe}}
+
+
+
+            </blockquote>
+
             <!-- post share -->
             <ul class="post-content-share list-inline mb-5">
               <li class="list-inline-item">
@@ -266,7 +272,7 @@ End Fixed Navigation
           <div class="widget-post widget">
             <h2>Latest Post</h2>
             <!-- latest post -->
-            
+
             <ul class="widget-post-list">
               {% for obj in obj%}
               <li class="widget-post-list-item">
@@ -352,7 +358,7 @@ End Fixed Navigation
 
 <!-- end Footer Area
 ========================================== -->
-<!-- 
+<!--
     Essential Scripts
     =====================================-->
 <!-- Main jQuery -->

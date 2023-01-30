@@ -271,7 +271,7 @@
                 <li><a href="{% url 'create_post' %}">Create post</a></li>
                 {% comment %} <li><a href="{% url 'admin_panel:delivery' %}">Delivary Mangement</a></li>
                 <li><a href="{% url 'admin_panel:post' %}">Job Post</a></li>
-                <li><a href="{% url 'admin_panel:ourteam' %}">Our Team</a></li> {% endcomment %} 
+                <li><a href="{% url 'admin_panel:ourteam' %}">Our Team</a></li> {% endcomment %}
                 <li>
                     <a class="has-arrow" aria-expanded="false" href="javascript:;">users</a>
                     <ul>
@@ -303,15 +303,15 @@
             <!-- .Revenue chart-->
             <div class="chart-area">
                 <div class="theme-card">
-             
+
                     <div class="table-top">
                         <h4>Create Blog</h4>
                     </div>
-            
+
                         <form action="" method="post" enctype="multipart/form-data">
                             {% include 'messages.html' %}
                           <form action="" method="post" enctype="multipart/form-data">
-            
+
                         {% csrf_token %}
                         <div class="create-plans">
                             <div class="row">
@@ -345,7 +345,7 @@
                                         <input name="short_description" id="short_description" value="" type="text" placeholder="">
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-12 col-12">
                                     <div class="form-group">
                                         <label for="">Description</label>
@@ -401,7 +401,7 @@
     <script src="{% static 'website/assets/vendors/datatable/js/jquery.dataTables.min.js' %}"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <script>$('#date').datepicker({ dateFormat: 'dd-mm-yy' }).val();</script>
-    
+
     <!-- main js -->
     <script src="{% static 'website/assets/js/scripts.js' %}"></script>
 

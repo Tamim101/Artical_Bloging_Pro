@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import auth
 from core.models import *
-from django.contrib import messages  
+from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 # Create your views here.
 def Home(request):
@@ -20,9 +20,9 @@ def singel_blog(request,pk):
 
 def login(request):
     if request.method == 'POST':
-   
+
         email = request.POST['email']
-      
+
         print(email)
         password = request.POST['password']
         if email and password:
@@ -36,9 +36,9 @@ def login(request):
                     'context_instance': request
                 }
                  return render(request, 'admin_panel/templates/index.html', context)
-    
+
         return render(request, 'login.html')
-  
+
     return render(request, 'login.html')
 
 
@@ -62,8 +62,8 @@ def logoutuser(request):
         return render(request, 'login.html', context)
     else:
         return render(request, 'login.html')
-    
-    
+
+
 @staff_member_required(login_url='login/')
 def user(request):
     alluser = User.object.all().order_by('-create_at')
@@ -83,14 +83,14 @@ def deleteUsers(request, pk):
         if deletedUser.is_staff != True:
             deletedUser.delete()
         alluser = User.object.all().order_by('-create_at')
-    
+
         return render(request, 'admin_panel/templates/user.html', {'all_user': alluser})
     except:
         alluser = User.object.all().order_by('-create_at')
-        
+
         return render(request, 'admin_panel/templates/user.html', {'all_user': alluser })
-    
-    
+
+
 
 def create_post(request):
             return render(request, 'admin_panel/templates/createpost.html')
@@ -100,7 +100,7 @@ def create_post(request):
 def create_post(request):
     if request.method == 'GET':
         all_post = blog_model.objects.all().order_by('-create_at')
-  
+
         return render(request, 'admin_panel/templates/createpost.html', {'all_post': all_post})
     else:
         topic = request.POST['topic']
@@ -108,8 +108,6 @@ def create_post(request):
         short_description = request.POST['short_description']
         description = request.POST['description']
         thumbnail = request.FILES.get('thumbnail')
-    
-        print(thumbnail)
         # w, h = get_image_dimensions(thumbnail)
         # if w == 301 & h == 168:
         #     print(w, h)
@@ -120,12 +118,13 @@ def create_post(request):
         #     return render(request, 'admin_panel/templates/createpost.html')
 
         create_blog = blog_model(
-     
+
             title=title,
             description=description,
             topic=topic,
             short_description=short_description,
             thumbnail=thumbnail,
+
 
         )
         try:
@@ -141,7 +140,7 @@ def create_post(request):
     return render(request, 'admin_panel/templates/createpost.html')
 
 
-from django.core.files.storage import FileSystemStorage   
+from django.core.files.storage import FileSystemStorage
 
 def validate_image(fieldfile_obj):
     filesize = fieldfile_obj.file.size
@@ -150,8 +149,8 @@ def validate_image(fieldfile_obj):
     megabyte_limit = 5.0
     if filesize > megabyte_limit * 1024 * 1024:
         raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
-    
-@staff_member_required(login_url='login/')   
+
+@staff_member_required(login_url='login/')
 def get_blog_post(request):
     blog = blog_model.objects.all().order_by('-create_at')
     return render(request,'admin_panel/templates/lost_blog.html',{'blog':blog})
@@ -166,12 +165,12 @@ def delete_blog(request, pk):
         # deletedblog.delete()
         blog = blog_model.objects.get(id=pk)
         blog.delete()
-    
+
         return render(request,'admin_panel/templates/lost_blog.html',{'blog':blog})
 
     except:
         blog = blog_model.objects.all()
-        
+
         return render(request,'admin_panel/templates/lost_blog.html',{'blog':blog})
 @staff_member_required(login_url='login/')
 def sing_up(request):
@@ -211,7 +210,7 @@ def sing_up(request):
                 trashOldMsg(request)
                 messages.error(request, 'Password not match')
                 return render(request, 'admin_panel/templates/sign_up.html')
-      
+
         return render(request, 'admin_panel/templates/sign_up.html')
 def trashOldMsg(req):
     storage = messages.get_messages(req)
@@ -220,9 +219,9 @@ def trashOldMsg(req):
         pass
     for _ in list(storage._loaded_messages):
         del storage._loaded_messages[0]
-        
 
-@staff_member_required(login_url='login/')
+
+
 def our_Team(request):
     if request.method == 'GET':
         trashOldMsg(request)
@@ -245,7 +244,7 @@ def our_Team(request):
                 if h == 393:
                     print('done')
                 else:
-             
+
                     trashOldMsg(request)
                     messages.error(request, 'Image size should be 370px width * 393px height.')
                     return render(request, 'team.html')
@@ -278,16 +277,16 @@ def delete_team(request, pk):
         # deletedblog.delete()
         allTeam = ourTeam.objects.get(id=pk)
         allTeam.delete()
-    
+
         return render(request,'admin_panel/templates/our_team.html',{'allTeam':allTeam})
 
     except:
         allTeam = ourTeam.objects.all()
         return render(request,'admin_panel/templates/our_team.html',{'allTeam':allTeam})
-        
-        
-@staff_member_required(login_url='login/')       
-        
+
+
+@staff_member_required(login_url='login/')
+
 def create_team(request):
     if request.method == 'GET':
         trashOldMsg(request)
@@ -310,7 +309,7 @@ def create_team(request):
             #     if h == 393:
             #         print('done')
             #     else:
-             
+
             #         trashOldMsg(request)
             #         messages.error(request, 'Image size should be 370px width * 393px height.')
             #         return render(request, 'admin_panel/templates/team_create.html')
@@ -328,10 +327,10 @@ def create_team(request):
             trashOldMsg(request)
             messages.error(request, 'Team Created Unsuccessful')
             return render(request, 'admin_panel/templates/team_create.html')
-        
-        
-# from django.core.mail import send_mail    
-# from django.conf.global_settings import EMAIL_HOST_USER   
+
+
+# from django.core.mail import send_mail
+# from django.conf.global_settings import EMAIL_HOST_USER
 # def send_email(request):
 #     print('working')
 #     if request.method == 'POST':
@@ -340,7 +339,7 @@ def create_team(request):
 #         note = request.POST['note']
 #         number = request.POST['number']
 #         if name and email and note and number:
-        
+
 #             print('email')
 #             email = send_mail(' from :{}'.format(email), 'Hey, it\'s {}. Phone Number: {} '.format(name, number) + note,
 #                               EMAIL_HOST_USER, ['tamimkhan7133@gmail.com', ], fail_silently=False)
@@ -350,8 +349,14 @@ def create_team(request):
 
 #         else:
 #             return render(request, 'onepage-slider.html')
-        
-        
+
+
 def about_us(request):
     allTeam = ourTeam.objects.all()
     return render(request,'about.html' ,{'allTeam': allTeam})
+
+
+def inx(request):
+    
+    return render(request,'index.html')
+

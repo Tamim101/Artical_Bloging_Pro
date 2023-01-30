@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 from django.db import models
 
-# from ckeditor.fields import RichTextField
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
@@ -12,7 +12,7 @@ class MyAccountManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         if not username:
             raise ValueError('User must have an username')
-        
+
 
         user = self.model(email=self.normalize_email(email), username=username)
         user.set_password(password)
@@ -81,12 +81,12 @@ class blog_model(models.Model):
     topic = models.CharField(max_length=200,null=True)
     title = models.CharField(max_length=200)
     short_description = models.TextField(default='',max_length=50)
-    description = models.TextField(default='',max_length=5000)
+    description = RichTextField(blank=True,null=True)
     thumbnail = models.FileField(upload_to='images', null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now_add=True)
 
-    
+
     class Meta:
         ordering = ['-update_at', '-create_at']
     def __str__(self):
@@ -132,4 +132,3 @@ class ourTeam(models.Model):
     google = models.CharField(null=True, max_length=500)
     whatapp = models.CharField(null=True, max_length=500)
 
-   
